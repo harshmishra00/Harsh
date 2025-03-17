@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f8f8f8;
+        }
+        .header {
+            background-color: #2ca02c;
+            color: white;
+            padding: 20px;
+            font-size: 26px;
+            font-weight: bold;
+        }
+        .nav {
+            margin-top: 5px;
+        }
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        .box {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            width: 500px;
+            margin: 15px;
+            box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            margin-left: 80px;
+            margin-right: 80px;
+        }
+        .box h3 {
+            margin: 0;
+            color: #2ca02c;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .box p {
+            margin-top: 5px;
+            color: #333;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div>Welcome to your Website Task</div>
+        <div class="nav">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="box">
+            <h3>About CSS</h3>
+            <p>Cascading style sheets (CSS) allow you to style and layout your web pages, adding colors, spacing, and more.</p>
+        </div>
+       
+        <div class="box">
+            <h3>Box Model</h3>
+            <p>The CSS box model describes the rectangular boxes generated to elements. It includes margin, border, padding, and the actual content.</p>
+        </div>
+    </div>
+    <div class="box">
+        <h3>Responsive Design</h3>
+        <p>Responsive design ensures your webpage looks great on all devices from desktop to mobile phones.</p>
+    </div>
+
+</body>
+</html>
