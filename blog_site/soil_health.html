@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soil Health Monitoring - Farmer's Companion</title>
+    <link rel="stylesheet" href="soil_health.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-seedling"></i> Soil Health Monitor</h1>
+            <p>Get precise soil analysis and crop recommendations</p>
+        </header>
+
+        <main>
+         
+            <section class="soil-test-section">
+                <h2>Soil Test Parameters</h2>
+                <form id="soilTestForm" class="soil-test-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="ph">pH Level (0-14)</label>
+                            <input type="number" id="ph" name="ph" min="0" max="14" step="0.1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nitrogen">Nitrogen (mg/kg)</label>
+                            <input type="number" id="nitrogen" name="nitrogen" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phosphorus">Phosphorus (mg/kg)</label>
+                            <input type="number" id="phosphorus" name="phosphorus" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="potassium">Potassium (mg/kg)</label>
+                            <input type="number" id="potassium" name="potassium" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="organic-matter">Organic Matter (%)</label>
+                            <input type="number" id="organic-matter" name="organic-matter" min="0" max="100" step="0.1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="moisture">Moisture Content (%)</label>
+                            <input type="number" id="moisture" name="moisture" min="0" max="100" step="0.1" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">Analyze Soil Health</button>
+                </form>
+            </section>
+
+           
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <h2>Soil Analysis Results</h2>
+                <div class="results-grid">
+                    <div class="result-card soil-health-score">
+                        <h3>Overall Soil Health</h3>
+                        <div class="score-circle">
+                            <span id="healthScore">0</span>
+                            <span class="score-label">/100</span>
+                        </div>
+                        <div id="healthStatus" class="health-status"></div>
+                    </div>
+                    <div class="result-card recommendations">
+                        <h3>Recommendations</h3>
+                        <ul id="recommendationsList"></ul>
+                    </div>
+                    <div class="result-card suitable-crops">
+                        <h3>Suitable Crops</h3>
+                        <div id="suitableCrops" class="crops-grid"></div>
+                    </div>
+                </div>
+            </section>
+
+            
+            <section class="tips-section">
+                <h2>Soil Health Tips</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <i class="fas fa-balance-scale"></i>
+                        <h3>pH Balance</h3>
+                        <p>Maintain soil pH between 6.0-7.0 for optimal nutrient availability.</p>
+                    </div>
+                    <div class="tip-card">
+                        <i class="fas fa-leaf"></i>
+                        <h3>Organic Matter</h3>
+                        <p>Add compost to increase organic matter and improve soil structure.</p>
+                    </div>
+                    <div class="tip-card">
+                        <i class="fas fa-tint"></i>
+                        <h3>Moisture</h3>
+                        <p>Proper irrigation and mulching help maintain optimal soil moisture.</p>
+                    </div>
+                    <div class="tip-card">
+                        <i class="fas fa-microscope"></i>
+                        <h3>Regular Testing</h3>
+                        <p>Test your soil every 2-3 years to track changes and adjust practices.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+      
+        <section class="seasonal-insights">
+            <h2>Seasonal Crop Calendar & Market Insights</h2>
+            <div class="insights-container">
+                <div class="season-calendar">
+                    <h3><i class="fas fa-calendar-alt"></i> Current Season</h3>
+                    <div class="current-season">
+                        <div class="season-info" id="seasonInfo">
+                            <h4>Loading season data...</h4>
+                        </div>
+                        <div class="recommended-crops" id="seasonalCrops">
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="market-trends">
+                    <h3><i class="fas fa-chart-line"></i> Market Trends</h3>
+                    <div class="trends-grid" id="marketTrends">
+                        <div class="trend-card high-demand">
+                            <i class="fas fa-arrow-trend-up"></i>
+                            <h4>High Demand</h4>
+                            <ul id="highDemandCrops">
+                                
+                            </ul>
+                        </div>
+                        <div class="trend-card best-price">
+                            <i class="fas fa-coins"></i>
+                            <h4>Best Price</h4>
+                            <ul id="bestPriceCrops">
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="farming-tips">
+                    <h3><i class="fas fa-lightbulb"></i> Seasonal Tips</h3>
+                    <div class="tips-carousel" id="seasonalTips">
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="learning-hub">
+            <h2><i class="fas fa-graduation-cap"></i> Soil Health Learning Hub</h2>
+            <div class="hub-container">
+                
+                <div class="learning-module">
+                    <h3><i class="fas fa-book-reader"></i> Learning Modules</h3>
+                    <div class="module-grid" id="learningModules">
+                        <div class="module-card">
+                            <i class="fas fa-flask"></i>
+                            <h4>Soil Science Basics</h4>
+                            <p>Learn fundamental concepts of soil composition and health.</p>
+                            <button class="module-btn" data-module="basics">Start Learning</button>
+                        </div>
+                        <div class="module-card">
+                            <i class="fas fa-seedling"></i>
+                            <h4>Crop Nutrition</h4>
+                            <p>Understanding nutrient requirements for different crops.</p>
+                            <button class="module-btn" data-module="nutrition">Start Learning</button>
+                        </div>
+                        <div class="module-card">
+                            <i class="fas fa-water"></i>
+                            <h4>Water Management</h4>
+                            <p>Best practices for irrigation and water conservation.</p>
+                            <button class="module-btn" data-module="water">Start Learning</button>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div class="practical-guides">
+                    <h3><i class="fas fa-hands-helping"></i> Practical Guides</h3>
+                    <div class="guides-grid">
+                        <div class="guide-card">
+                            <div class="guide-icon"><i class="fas fa-calendar-alt"></i></div>
+                            <div class="guide-content">
+                                <h4>Seasonal Planning</h4>
+                                <p>Month-by-month guide for soil management</p>
+                                <a href="#" class="guide-link" data-guide="seasonal">View Guide</a>
+                            </div>
+                        </div>
+                        <div class="guide-card">
+                            <div class="guide-icon"><i class="fas fa-chart-line"></i></div>
+                            <div class="guide-content">
+                                <h4>Soil Testing Guide</h4>
+                                <p>Step-by-step soil testing procedures</p>
+                                <a href="#" class="guide-link" data-guide="testing">View Guide</a>
+                            </div>
+                        </div>
+                        <div class="guide-card">
+                            <div class="guide-icon"><i class="fas fa-bug"></i></div>
+                            <div class="guide-content">
+                                <h4>Problem Solving</h4>
+                                <p>Common soil issues and solutions</p>
+                                <a href="#" class="guide-link" data-guide="problems">View Guide</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                    
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="soil_health.js"></script>
+</body>
+</html>

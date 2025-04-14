@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agriculture Machinery Rental</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: #f3faff;
+      padding: 2rem;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #2a9d8f;
+    }
+    .machine-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      max-width: 1000px;
+      margin: 0 auto 2rem auto;
+    }
+    .machine {
+      border: 2px solid transparent;
+      border-radius: 15px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s, border 0.3s;
+      background: white;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .machine img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+    }
+    .machine span {
+      display: block;
+      padding: 0.5rem;
+      font-weight: 500;
+    }
+    .machine.selected {
+      border: 2px solid #2a9d8f;
+      transform: scale(1.03);
+    }
+    form {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      margin-top: 1rem;
+      font-weight: 500;
+    }
+    input[type="datetime-local"] {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+    button {
+      margin-top: 2rem;
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+      background: #2a9d8f;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #21867a;
+    }
+    .alert {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #e0ffe0;
+      border: 1px solid #a8e6a3;
+      border-radius: 10px;
+      color: #2e7d32;
+      display: none;
+    }
+    .price-info {
+      margin-top: 1rem;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <h1>🚜 Rent Agriculture Machinery</h1>
+
+  <div class="machine-gallery" id="machineGallery">
+    <!-- Machine cards will be injected here -->
+  </div>
+
+  <form id="rentalForm">
+    <label for="start">Start Date and Time:</label>
+    <input type="datetime-local" id="start" required>
+
+    <label for="end">End Date and Time:</label>
+    <input type="datetime-local" id="end" required>
+
+    <div class="price-info">
+      <span>Price per Hour: ₹<span id="pricePerHour">100</span></span>
+      <div id="totalPrice">Total Price: ₹0</div>
+    </div>
+
+    <button type="submit">Book Now</button>
+    <div class="alert" id="alertBox"></div>
+  </form>
+
+  <script>
+    const machines = [
+      { name: "Tractor", img: "https://www.deere.com.mx/assets/images/region-3/products/tractors/large/8r-series/8295r/trator_8295r_campo1_large_6ad8df214da04053ad0e1c8b8c52318c15ce8a8d.jpg", pricePerHour: 100 },
+      { name: "Combine Harvester", img: "https://2.bp.blogspot.com/-Uy6TUA0yRuw/WMqi5_s6eZI/AAAAAAAAK-M/Kpk5G7qXIYs1vtsCE4xijM9DlJdj0YQjACLcB/s1600/1.jpg", pricePerHour: 150 },
+      { name: "Rotavator", img: "https://www.tillermaxx.com/images/HR40_F.jpg", pricePerHour: 80 },
+      { name: "Cultivator", img: "https://cdn.britannica.com/84/73384-050-6DFF3413/crop-cultivator.jpg", pricePerHour: 90 },
+      { name: "Seed Drill", img: "https://img.agriexpo.online/images_ag/photo-g/170513-11808403.jpg", pricePerHour: 120 },
+      { name: "Sprayer", img: "https://cdn.agriland.ie/uploads/2015/09/Sprayer_2_OGP.jpg", pricePerHour: 110 },
+      { name: "Baler", img: "https://cdn.agriland.ie/uploads/2017/08/New-John-Deere-V461M-round-baler-B.jpg", pricePerHour: 130 },
+      { name: "Plough", img: "https://www.clarkemachinery.ie/wp-content/uploads/2017/04/KV-2500-B-1095.jpg.jpg", pricePerHour: 85 },
+    ];
+
+    const gallery = document.getElementById('machineGallery');
+    const selectedMachines = new Set();
+    let pricePerHour = 100;
+
+    machines.forEach(machine => {
+      const div = document.createElement('div');
+      div.className = 'machine';
+      div.innerHTML = `<img src="${machine.img}?auto=compress&h=200" alt="${machine.name}"><span>${machine.name}</span>`;
+      div.addEventListener('click', () => {
+        div.classList.toggle('selected');
+        if (div.classList.contains('selected')) {
+          selectedMachines.add(machine.name);
+          pricePerHour = machine.pricePerHour;
+        } else {
+          selectedMachines.delete(machine.name);
+          if (selectedMachines.size === 0) pricePerHour = 100; // Reset to default if no machine is selected
+        }
+        updatePriceInfo();
+      });
+      gallery.appendChild(div);
+    });
+
+    const form = document.getElementById('rentalForm');
+    const alertBox = document.getElementById('alertBox');
+    const totalPrice = document.getElementById('totalPrice');
+    const priceElement = document.getElementById('pricePerHour');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const start = document.getElementById('start').value;
+      const end = document.getElementById('end').value;
+
+      if (!selectedMachines.size || !start || !end) {
+        showAlert('Please select at least one machine and enter valid dates.', 'error');
+        return;
+      }
+
+      const startTime = new Date(start);
+      const endTime = new Date(end);
+
+      if (startTime >= endTime) {
+        showAlert('End time must be after start time.', 'error');
+        return;
+      }
+
+      const hours = Math.ceil((endTime - startTime) / (1000 * 60 * 60)); // Calculate hours
+      const totalCost = hours * pricePerHour;
+      showAlert(`Booking confirmed for: ${Array.from(selectedMachines).join(', ')} from ${startTime.toLocaleString()} to ${endTime.toLocaleString()}. Total Price: ₹${totalCost}`);
+    });
+
+    function updatePriceInfo() {
+      priceElement.textContent = pricePerHour;
+      const start = document.getElementById('start').value;
+      const end = document.getElementById('end').value;
+      
+      if (start && end) {
+        const startTime = new Date(start);
+        const endTime = new Date(end);
+        const hours = Math.ceil((endTime - startTime) / (1000 * 60 * 60)); // Calculate hours
+        const totalCost = hours * pricePerHour;
+        totalPrice.textContent = `Total Price: ₹${totalCost}`;
+      }
+    }
+
+    function showAlert(message, type = 'success') {
+      alertBox.textContent = message;
+      alertBox.style.display = 'block';
+      alertBox.style.background = type === 'error' ? '#ffe0e0' : '#e0ffe0';
+      alertBox.style.borderColor = type === 'error' ? '#ff9999' : '#a8e6a3';
+      alertBox.style.color = type === 'error' ? '#b30000' : '#2e7d32';
+    }
+  </script>
+</body>
+</html>

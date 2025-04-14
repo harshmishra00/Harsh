@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pest Control Quote Request</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f7f7f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .form-container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    input, select, textarea {
+      padding: 0.8rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 0.8rem;
+      background-color: #007B3E;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #005f2c;
+    }
+
+    .confirmation {
+      margin-top: 1rem;
+      background-color: #e0ffe0;
+      padding: 1rem;
+      border-left: 4px solid #007B3E;
+      border-radius: 8px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Request a Pest Control Quote</h2>
+    <form id="pestQuoteForm">
+      <input type="text" name="name" placeholder="Your Full Name" required />
+      <input type="email" name="email" placeholder="Your Email Address" required />
+      <input type="tel" name="phone" placeholder="Phone Number" required />
+
+      <select name="pestType" required>
+        <option value="">Select Pest Issue</option>
+        <option value="termites">Termites</option>
+        <option value="cockroaches">Cockroaches</option>
+        <option value="rodents">Rodents</option>
+        <option value="bedbugs">Bed Bugs</option>
+        <option value="mosquitoes">Mosquitoes</option>
+        <option value="other">Other</option>
+      </select>
+
+      <textarea name="description" rows="4" placeholder="Describe the issue in detail..." required></textarea>
+
+      <input type="date" name="preferredDate" required />
+
+      <button type="submit">Request Quote</button>
+    </form>
+
+    <div class="confirmation" id="confirmationMessage">
+      ✅ Your request has been submitted. We'll get back to you shortly!
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('pestQuoteForm');
+    const confirmation = document.getElementById('confirmationMessage');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      confirmation.style.display = 'block';
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>

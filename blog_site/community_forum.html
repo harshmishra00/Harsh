@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmers' Community Forum - Crop Advisory</title>
+    <link rel="stylesheet" href="community_forum.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>Farmers' Community</h1>
+            </div>
+            
+        </nav>
+    </header>
+
+    <main>
+        <div class="forum-container">
+            <div class="forum-header">
+                <h2>Community Forum</h2>
+                <button id="createPostBtn" class="btn-primary">Create New Post</button>
+            </div>
+
+            <div class="search-bar">
+                <input type="text" placeholder="Search discussions..." id="searchInput">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+
+            <div class="categories">
+                <button class="category-btn active" data-category="all">All Topics</button>
+                <button class="category-btn" data-category="crops">Crop Management</button>
+                <button class="category-btn" data-category="weather">Weather Updates</button>
+                <button class="category-btn" data-category="pests">Pest Control</button>
+                <button class="category-btn" data-category="market">Market Trends</button>
+            </div>
+
+            <div class="posts-container" id="postsContainer">
+                
+            </div>
+        </div>
+
+        
+        <div id="createPostModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Create New Post</h2>
+                <form id="postForm">
+                    <div class="form-group">
+                        <label for="postTitle">Title</label>
+                        <input type="text" id="postTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="postCategory">Category</label>
+                        <select id="postCategory" required>
+                            <option value="crops">Crop Management</option>
+                            <option value="weather">Weather Updates</option>
+                            <option value="pests">Pest Control</option>
+                            <option value="market">Market Trends</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="postContent">Content</label>
+                        <textarea id="postContent" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Post</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Crop Advisory and Farmer's Companion. All rights reserved.</p>
+    </footer>
+
+    <script src="community_forum.js"></script>
+</body>
+</html>

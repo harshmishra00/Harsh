@@ -1,0 +1,141 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f7;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  .dashboard-container {
+    max-width: 1000px;
+    margin: auto;
+    background-color: #ffffff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .language-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  /* Tab styles */
+  .tabs {
+    margin-top: 20px;
+  }
+  
+  .tabs input[type="radio"] {
+    display: none;
+  }
+  
+  .tabs label {
+    display: inline-block;
+    padding: 10px 16px;
+    margin-right: 5px;
+    background-color: #ddd;
+    color: #333;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .tabs input[type="radio"]:checked + label {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .tab-content {
+    display: none;
+    margin-top: 20px;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  #schedule:checked ~ label[for="schedule"] ~ #schedule-tab,
+  #monitoring:checked ~ label[for="monitoring"] ~ #monitoring-tab,
+  #analytics:checked ~ label[for="analytics"] ~ #analytics-tab,
+  #fields:checked ~ label[for="fields"] ~ #fields-tab,
+  #support:checked ~ label[for="support"] ~ #support-tab,
+  #cropinfo:checked ~ label[for=\"cropinfo\"] ~ #cropinfo-tab {
+    display: block;
+  }
+  
+  /* Form and UI elements */
+  input[type=\"text\"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    resize: vertical;
+  }
+  
+  textarea {
+    min-height: 100px;
+  }
+  
+  button {
+    padding: 10px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  .chart-placeholder {
+    width: 100%;
+    height: 200px;
+    background-color: #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    border: 1px dashed #bbb;
+    border-radius: 6px;
+  }
+  
+  /* Settings */
+  .settings {
+    margin-top: 30px;
+    padding-top: 10px;
+    border-top: 1px solid #ccc;
+  }
+  
+  .settings label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  /* Crop Info tab */
+  #crop-details {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
