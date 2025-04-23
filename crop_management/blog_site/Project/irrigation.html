@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Irrigation Management Dashboard</title>
+  <link rel="stylesheet" href="irrigation.css" />
+</head>
+<body>
+  <div class="dashboard-container">
+    <div class="dashboard-header">
+      <h1>Irrigation Management Dashboard</h1>
+      <div class="language-toggle">
+        <span>Hindi</span>
+        <input type="checkbox" id="lang-toggle" />
+      </div>
+    </div>
+
+    <div class="tabs">
+      <input type="radio" id="schedule" name="tab" checked>
+      <label for="schedule">Schedule</label>
+      <input type="radio" id="monitoring" name="tab">
+      <label for="monitoring">Monitoring</label>
+      <input type="radio" id="analytics" name="tab">
+      <label for="analytics">Analytics</label>
+      <input type="radio" id="fields" name="tab">
+      <label for="fields">Field Setup</label>
+      <input type="radio" id="support" name="tab">
+      <label for="support">Support</label>
+      <input type="radio" id="cropinfo" name="tab">
+      <label for="cropinfo">Crop Info</label>
+
+      <div class="tab-content" id="schedule-tab">
+        <h2>Irrigation Scheduling</h2>
+        <input type="text" placeholder="Crop Type" />
+        <input type="text" placeholder="Set Time (e.g., 6 AM)" />
+        <input type="text" placeholder="Duration (e.g., 30 mins)" />
+        <button>Save Schedule</button>
+      </div>
+
+      <div class="tab-content" id="monitoring-tab">
+        <h2>Soil Moisture Monitoring</h2>
+        <div class="chart-placeholder">[Chart goes here]</div>
+      </div>
+
+      <div class="tab-content" id="analytics-tab">
+        <h2>Water Usage Analytics</h2>
+        <p>Daily/Weekly/Monthly usage breakdown.</p>
+        <button>Download Report (PDF)</button>
+      </div>
+
+      <div class="tab-content" id="fields-tab">
+        <h2>Field & Equipment Management</h2>
+        <input type="text" placeholder="Field Name" />
+        <textarea placeholder="Irrigation Method Details (e.g., Drip, Sprinkler)"></textarea>
+        <button>Save Field</button>
+      </div>
+
+      <div class="tab-content" id="support-tab">
+        <h2>Help & Support</h2>
+        <textarea placeholder="Ask a question or request help..."></textarea>
+        <button>Submit</button>
+        <p>Community Forums | Government Guidelines | Chat Support</p>
+      </div>
+
+      <div class="tab-content" id="cropinfo-tab">
+        <h2>Crop Information</h2>
+        <label for="crop-select">Select Crop:</label>
+        <select id="crop-select">
+          <option value="">--Select--</option>
+          <option value="wheat">Wheat</option>
+          <option value="rice">Rice</option>
+          <option value="maize">Maize</option>
+        </select>
+
+        <div id="crop-details" style="margin-top: 20px;"></div>
+      </div>
+    </div>
+
+    <div class="settings">
+      <h2>Settings & Notifications</h2>
+      <label>
+        Enable Alerts
+        <input type="checkbox" id="alert-toggle" />
+      </label>
+    </div>
+  </div>
+
+  <script src="irrigation.js"></script>
+</body>
+</html>

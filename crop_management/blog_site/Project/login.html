@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Farmacy Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            padding-right: 20px;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                justify-content: center;
+                padding-right: 20px;
+            }
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.97);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 600px;  
+            backdrop-filter: blur(10px);
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+            margin-left: 45%;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 24px;
+                width: 95%; 
+            }
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            
+        }
+
+        .login form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .input-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .input-container i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 19px;
+        }
+
+        .input-container input[type="text"],
+        .input-container input[type="password"] {
+            padding-left: 45px; 
+        }
+
+        .social-signin {
+            position: relative;
+        }
+
+        .social-signin i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 19px;
+        }
+
+        .google-signin i {
+            color: #DB4437;
+        }
+
+        .apple-signin i {
+            color: #000000;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            padding: 15px;
+            border: 2px solid #e1e1e1;
+            border-radius: 12px;
+            font-size: 16px;
+            width: 100%;
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #43cea2;
+            box-shadow: 0 0 15px rgba(67, 206, 162, 0.2);
+            transform: scale(1.01);
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #43cea2, #185a9d);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background: linear-gradient(45deg, #185a9d, #43cea2);
+            box-shadow: 0 5px 15px rgba(67, 206, 162, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .forgot-password {
+            color: #185a9d;
+            text-decoration: none;
+            text-align: center;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            color: #43cea2;
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            color: #555;
+            font-size: 15px;
+        }
+
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #43cea2;
+        }
+
+        .hr-with-text {
+            position: relative;
+            text-align: center;
+            margin: 24px 0;
+        }
+
+        .hr-with-text::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #43cea2);
+        }
+
+        .hr-with-text::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 50%;
+            width: 45%;
+            height: 1px;
+            background: linear-gradient(to left, transparent, #43cea2);
+        }
+
+        .hr-with-text span {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 0 15px;
+            color: #666;
+            font-size: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        p {
+            color: #555;
+            font-size: 0.95rem;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        p a {
+            color: #185a9d;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        p a:hover {
+            color: #43cea2;
+        }
+
+        .sign-in {
+            margin-top: 24px;
+        }
+
+        .sign-in input[type="text"] {
+            background: #f8f9fa;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .sign-in input[type="text"]:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .join-now {
+            margin-top: 32px;
+            text-align: center;
+        }
+
+        .join-now a {
+            color: #185a9d;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .join-now a:hover {
+            color: #43cea2;
+            text-shadow: 0 0 15px rgba(67, 206, 162, 0.3);
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 24px;
+            }
+
+            input[type="text"],
+            input[type="password"],
+            .btn {
+                padding: 12px;
+            }
+        }
+
+        .quote-container {
+            position: absolute;
+            left: 8%;
+            max-width: 500px;
+            color: white;
+            text-align: left;
+            padding: 48px;
+            transform: translateY(-20px);
+            animation: float 6s ease-in-out infinite;
+            transition: all 0.4s ease;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(-20px); }
+            50% { transform: translateY(0px); }
+        }
+
+        .quote-box {
+            position: relative;
+            background: rgba(67, 206, 162, 0.25);
+            border-radius: 30px;
+            padding: 48px;
+            box-shadow: 
+                0 10px 20px rgba(0, 0, 0, 0.1),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 0 20px rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            transition: all 0.4s ease;
+            animation: colorChange 10s infinite alternate;
+        }
+
+        @keyframes colorChange {
+            0% {
+                background: rgba(67, 206, 162, 0.15);
+                border-left: 4px solid #43cea2;
+            }
+            50% {
+                background: rgba(24, 90, 157, 0.15);
+                border-left: 4px solid #185a9d;
+            }
+            100% {
+                background: rgba(106, 133, 182, 0.15);
+                border-left: 4px solid #6a85b6;
+            }
+        }
+
+        .quote-box:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 
+                0 15px 30px rgba(0, 0, 0, 0.2),
+                0 0 0 2px rgba(255, 255, 255, 0.2),
+                inset 0 0 30px rgba(255, 255, 255, 0.1);
+            animation-play-state: paused;
+        }
+
+        .quote-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shine 8s linear infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .quote-text {
+            font-size: 32px;
+            font-weight: 400;
+            line-height: 1.6;
+            margin-bottom: 32px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-family: 'Georgia', serif;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .quote-box:hover .quote-text {
+            transform: scale(1.02);
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .quote-icon {
+            position: absolute;
+            font-size: 128px;
+            opacity: 0.1;
+            top: -20px;
+            left: -20px;
+            color: white;
+            font-family: 'Georgia', serif;
+            z-index: 0;
+            transition: all 0.4s ease;
+        }
+
+        .quote-box:hover .quote-icon {
+            transform: rotate(-10deg) scale(1.1);
+            opacity: 0.15;
+        }
+
+        .quote-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 24px;
+            margin-top: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .quote-box:hover .quote-footer {
+            border-top-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .quote-author {
+            font-size: 22px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+            animation: textColorChange 10s infinite alternate;
+        }
+
+        @keyframes textColorChange {
+            0% { color: #43cea2; }
+            50% { color: #185a9d; }
+            100% { color: #6a85b6; }
+        }
+
+        .quote-role {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
+            transition: all 0.3s ease;
+        }
+
+        .quote-box:hover .quote-role {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        @media (max-width: 1200px) {
+            .quote-container {
+                display: none;
+            }
+            .container {
+                margin-left: 0;
+            }
+        }
+
+        .otp-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .otp-container input[type="text"] {
+            flex: 1;
+        }
+
+        .verify-btn {
+            background: linear-gradient(45deg, #43cea2, #185a9d);
+            padding: 10px 20px;
+            min-width: 100px;
+            font-size: 14px;
+        }
+
+        .verify-btn i {
+            font-size: 14px;
+            transition: transform 0.3s ease;
+        }
+
+        .verify-btn:hover i {
+            transform: scale(1.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            margin-top: 15px;
+            background: linear-gradient(45deg, #185a9d, #43cea2);
+        }
+
+        .login-btn:hover i {
+            transform: translateX(5px);
+        }
+
+        .verify-btn:hover, .login-btn:hover {
+            background: linear-gradient(45deg, #43cea2, #185a9d);
+            box-shadow: 0 5px 15px rgba(67, 206, 162, 0.4);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="quote-container">
+        <div class="quote-box">
+            <div class="quote-icon">"</div>
+            <p class="quote-text">Agriculture is our wisest pursuit, because it will in the end contribute most to real wealth, good morals, and happiness.</p>
+            <div class="quote-footer">
+                <p class="quote-author">Thomas Jefferson</p>
+                <p class="quote-role">3rd President of the United States & Farmer</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="login">
+            <form action="">
+                <div class="input-container">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="Email or Phone">
+                </div>
+                
+                <div class="input-container">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Password" required>
+                </div>
+                <button class="btn" onclick="sendOTP()">Send OTP</button>
+
+                <div class="input-container otp-container">
+                    <i class="fas fa-shield-alt"></i>
+                    <input type="text" id="otp_inp" placeholder="Enter the OTP sent to your Email">
+                    <button class="btn verify-btn" id="otp-btn">
+                        Verify
+                    </button>
+                </div>
+
+                <button class="btn login-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Login
+                </button>
+
+                <a class="forgot-password" href="#">Forgot Password</a>
+
+                <label>
+                    <input type="checkbox" name="keep me logged in" id="keep me logged in">
+                    keep me logged in
+                </label>
+                <div class="hr-with-text">
+                    <span>OR</span>
+                </div>
+                <p>By clicking Continue, you agree to Farmacy's <a href=" ">User Agreement,</a> <a href=" ">Privacy Policy,</a> and <a href=" ">Cookie Policy</a>.
+                </p>
+        <div class="sign-in">
+            <div class="input-container social-signin google-signin">
+                <i class="fab fa-google"></i>
+                <input type="text" placeholder="Sign in with Google" readonly>
+            </div>
+            <div class="input-container social-signin apple-signin">
+                <i class="fab fa-apple"></i>
+                <input type="text" placeholder="Sign in with Apple" readonly>
+            </div>
+        </div>
+
+
+            </form>
+        </div>
+        <div class="join-now">
+            <p>New to Farmacy? <a href="">Join-now</a></p>
+        </div>
+
+    </div>
+</body>
+</html>
